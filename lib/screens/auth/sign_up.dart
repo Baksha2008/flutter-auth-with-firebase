@@ -1,15 +1,15 @@
-import 'package:auth_flutter/services/auth.service.dart';
 import 'package:auth_flutter/shared/constatns.dart';
 import 'package:flutter/material.dart';
+import 'package:auth_flutter/services/auth.service.dart';
 
-class SignIn extends StatefulWidget {
+class SignUp extends StatefulWidget {
   final Function onAuthToggle;
-  SignIn({this.onAuthToggle});
+  SignUp({this.onAuthToggle});
   @override
-  _SignInState createState() => _SignInState();
+  _SignUpState createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignIn> {
+class _SignUpState extends State<SignUp> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
 
@@ -23,14 +23,14 @@ class _SignInState extends State<SignIn> {
         backgroundColor: Colors.blue[100],
         appBar: AppBar(
           backgroundColor: Colors.blue[400],
-          title: Text('Sign in to app'),
+          title: Text('Sign up to app'),
           actions: <Widget>[
             FlatButton.icon(
                 onPressed: () {
                   widget.onAuthToggle();
                 },
                 icon: Icon(Icons.person),
-                label: Text('Sign up'))
+                label: Text('Sign in'))
           ],
         ),
         body: Container(
@@ -69,25 +69,17 @@ class _SignInState extends State<SignIn> {
                           return null;
                         }
                         ;
-                        dynamic result = await _auth.onSignIn(email, password);
-                        print(result);
+                        dynamic result = await _auth.onSignUp(email, password);
                         if (result == null) {
                           setState(() {
-                            error = "Could't sing in with this credantials";
+                            error = 'Please apply a vallid email';
                           });
                         }
                       },
                       color: Colors.pink[100],
-                      child: Text('Sign in',
+                      child: Text('Sign up',
                           style: TextStyle(color: Colors.white))),
                   SizedBox(height: 20),
-                  RaisedButton(
-                      onPressed: () async {
-                        await _auth.signInAnon();
-                      },
-                      color: Colors.pink[100],
-                      child: Text('Sign in anon',
-                          style: TextStyle(color: Colors.white))),
                   Text(
                     error,
                     style: TextStyle(color: Colors.red, fontSize: 18),

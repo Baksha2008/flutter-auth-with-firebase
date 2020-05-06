@@ -1,4 +1,5 @@
 import 'package:auth_flutter/screens/auth/sign%20_in.dart';
+import 'package:auth_flutter/screens/auth/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class Auth extends StatefulWidget {
@@ -7,8 +8,18 @@ class Auth extends StatefulWidget {
 }
 
 class _AuthState extends State<Auth> {
+  bool isLogin = true;
+  void onAuthToggle() {
+    setState(() {
+      isLogin = !isLogin;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SignIn();
+    if (isLogin) {
+      return SignIn(onAuthToggle: onAuthToggle);
+    }
+    return SignUp(onAuthToggle: onAuthToggle);
   }
 }
