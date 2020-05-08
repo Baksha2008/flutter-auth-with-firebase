@@ -17,9 +17,8 @@ class _AuthState extends State<Auth> {
 
   @override
   Widget build(BuildContext context) {
-    if (isLogin) {
-      return SignIn(onAuthToggle: onAuthToggle);
-    }
-    return SignUp(onAuthToggle: onAuthToggle);
+    return isLogin
+        ? SignIn(onAuthToggle: onAuthToggle)
+        : SignUp(onAuthToggle: onAuthToggle);
   }
 }
